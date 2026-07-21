@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is a Passkey? — Community Knowledge Sharing</title>
+<meta name="description" content="Everything you need to know about passkeys: what they are, why they exist, how they work, where they're stored, and best practices.">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128273;</text></svg>">
+</head>
+<body>
+
+<canvas id="ascii-bg" aria-hidden="true"></canvas>
+<div class="glow glow-a" data-speed="0.12" aria-hidden="true"></div>
+<div class="glow glow-b" data-speed="0.22" aria-hidden="true"></div>
+
+<nav id="nav">
+  <a class="logo" href="#top">passkey<span class="logo-accent">/</span>guide</a>
+  <div class="nav-links">
+    <a href="#what">What</a>
+    <a href="#why">Why</a>
+    <a href="#history">History</a>
+    <a href="#replaces">Replaces?</a>
+    <a href="#how">How</a>
+    <a href="#storage">Storage</a>
+    <a href="#forget">Forgot?</a>
+    <a href="#dos-donts">Dos &amp; Don'ts</a>
+    <a href="#lost">Lost?</a>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <div class="hero-inner" data-speed="0.35">
+    <pre class="ascii-art hero-key" id="hero-ascii" aria-hidden="true"></pre>
+    <p class="kicker">// community knowledge-sharing session</p>
+    <h1>What is a <span class="accent">Passkey</span>?</h1>
+    <p class="tagline">Everything you need to know about passwordless sign-in —
+       what it is, why it exists, how it works, and how not to get locked out.</p>
+    <div class="hero-cta">
+      <a class="btn" href="#what">Start learning</a>
+      <a class="btn btn-ghost" href="#dos-donts">Skip to Dos &amp; Don'ts</a>
+    </div>
+  </div>
+  <div class="scroll-hint" data-speed="0.6" aria-hidden="true">
+    <span class="scroll-hint-text">scroll</span>
+    <span class="scroll-hint-line"></span>
+  </div>
+  <span class="float-glyph" style="--x:8%;  --y:18%; --s:6rem"  data-speed="0.5" aria-hidden="true">#</span>
+  <span class="float-glyph" style="--x:85%; --y:12%; --s:4rem"  data-speed="0.7" aria-hidden="true">*</span>
+  <span class="float-glyph" style="--x:12%; --y:72%; --s:5rem"  data-speed="0.4" aria-hidden="true">@</span>
+  <span class="float-glyph" style="--x:88%; --y:68%; --s:7rem"  data-speed="0.55" aria-hidden="true">?</span>
+  <span class="float-glyph" style="--x:70%; --y:85%; --s:3rem"  data-speed="0.8" aria-hidden="true">****</span>
+</header>
+
+<main>
+
+<!-- ================= Q1 ================= -->
+<section id="what" class="reveal">
+  <span class="float-glyph" style="--x:92%; --y:6%; --s:9rem" data-speed="0.3" aria-hidden="true">&amp;</span>
+  <p class="q-tag">QUESTION 1</p>
+  <h2>What is a passkey?</h2>
+  <div class="callout callout-accent">
+    A <strong>passkey</strong> is a digital credential that lets you sign in to apps and
+    websites <strong>without a password</strong> — using the same fingerprint, face scan,
+    or PIN you use to unlock your device.
+  </div>
+  <ul class="bullets">
+    <li><strong>Built on public-key cryptography</strong> — a unique key pair replaces the typed secret.</li>
+    <li><strong>One passkey per account, per site</strong> — created automatically; never invented or typed by you.</li>
+    <li><strong>Unlocked locally</strong> — your biometrics stay on your device and are never sent to the website.</li>
+    <li><strong>An open standard</strong> — based on FIDO2 / WebAuthn, not owned by any single company.</li>
+  </ul>
+</section>
+
+<!-- ================= Q2a ================= -->
+<section id="why" class="reveal">
+  <span class="float-glyph" style="--x:4%; --y:10%; --s:8rem" data-speed="0.45" aria-hidden="true">!</span>
+  <p class="q-tag">QUESTION 2 — THE NEED</p>
+  <h2>Why do we need passkeys?</h2>
+  <p class="lead">Passwords were invented in 1961 — and the internet has outgrown them.</p>
+  <div class="grid grid-3">
+    <div class="card card-bad">
+      <h3>Humans are predictable</h3>
+      <p>We choose weak passwords and reuse them everywhere. Attackers exploit this with
+         <em>credential stuffing</em>: try leaked passwords on many other sites.</p>
+    </div>
+    <div class="card card-bad">
+      <h3>Phishing is rampant</h3>
+      <p>Fake login pages steal credentials every day. Even careful users get fooled —
+         and SMS one-time codes can be phished or intercepted too.</p>
+    </div>
+    <div class="card card-bad">
+      <h3>Servers get breached</h3>
+      <p>Websites must store your secret (or its hash). Every major breach dumps millions
+         of credentials onto the dark web.</p>
+    </div>
+  </div>
+  <div class="callout">
+    <strong>The root problem:</strong> a password is a <em>shared secret</em> — both you AND the
+    server know it. Whoever steals it, from either side, becomes you. The industry needed a login
+    with no shared secret, nothing to phish, and nothing to reuse. That is exactly what a passkey is.
+  </div>
+</section>
+
+<!-- ================= Q2b ================= -->
+<section id="history" class="reveal">
+  <p class="q-tag">QUESTION 2 — THE HISTORY</p>
+  <h2>How did passkeys emerge?</h2>
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="tl-year muted">1961</div>
+      <div class="tl-body">
+        <h3>Passwords are born</h3>
+        <p>MIT's CTSS computer introduces passwords for shared machines — the "shared secret" era begins.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-year">2012</div>
+      <div class="tl-body">
+        <h3>FIDO Alliance founded</h3>
+        <p>Tech companies (PayPal, Lenovo and others) unite with one goal: kill the password using cryptography.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-year violet">2019</div>
+      <div class="tl-body">
+        <h3>WebAuthn becomes a standard</h3>
+        <p>The W3C approves WebAuthn; together with FIDO's CTAP it forms FIDO2 — the plumbing behind passkeys.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-year green">2022</div>
+      <div class="tl-body">
+        <h3>The big three go all-in</h3>
+        <p>Apple, Google &amp; Microsoft jointly announce passkey support; it ships in iOS 16, Android and Windows.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-year">2023 &rarr;</div>
+      <div class="tl-body">
+        <h3>Mass adoption</h3>
+        <p>Google makes passkeys the default; WhatsApp, PayPal, Amazon, GitHub and hundreds more follow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Q3 ================= -->
+<section id="replaces" class="reveal">
+  <span class="float-glyph" style="--x:90%; --y:14%; --s:6rem" data-speed="0.5" aria-hidden="true">$</span>
+  <p class="q-tag">QUESTION 3</p>
+  <h2>Does it replace passwords &amp; traditional authentication?</h2>
+  <div class="callout callout-good">
+    <strong>Yes — that is the goal.</strong> A passkey is designed to replace the password
+    entirely, not sit next to it. During the transition, most sites keep passwords as a fallback.
+  </div>
+  <div class="grid grid-2">
+    <ul class="bullets">
+      <li><strong>Replaces passwords</strong> — sign in with a touch or glance instead of typing.</li>
+      <li><strong>Replaces SMS / app OTP codes</strong> — a passkey already proves two things:
+          your device (have) + biometrics/PIN (are/know). It is built-in 2FA.</li>
+      <li><strong>Replaces security questions</strong> — no "first pet's name" to guess or leak.</li>
+    </ul>
+    <ul class="bullets bullets-violet">
+      <li><strong>…but not overnight</strong> — many sites and older systems still require passwords today.</li>
+      <li><strong>Fallbacks remain</strong> — keep your account recovery options up to date during the transition.</li>
+      <li><strong>Hardware keys remain</strong> — device-bound passkeys on security keys serve high-security needs.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= Q4a ================= -->
+<section id="how" class="reveal">
+  <p class="q-tag">QUESTION 4 — PART 1</p>
+  <h2>How is a passkey generated?</h2>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <div>
+        <h3>You opt in</h3>
+        <p>On a supported site, choose <em>"Create a passkey"</em> in the account's security settings.</p>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num violet">2</div>
+      <div>
+        <h3>Your device makes a key pair</h3>
+        <p>The device's secure chip generates a unique public + private key pair for that
+           exact website. You never see or choose anything.</p>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num green">3</div>
+      <div>
+        <h3>The public key goes to the site</h3>
+        <p>The website stores only your public key — like giving the site a padlock only you can open.</p>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">4</div>
+      <div>
+        <h3>The private key stays with you</h3>
+        <p>It never leaves your device's secure storage (and syncs only in encrypted form).
+           At login, it signs a one-time challenge to prove it's you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Q4b ================= -->
+<section id="stronger" class="reveal">
+  <p class="q-tag">QUESTION 4 — PART 2</p>
+  <h2>Why is it stronger than passwords?</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th></th><th class="bad">Password</th><th class="bad">Password + SMS OTP</th><th class="good">Passkey</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Phishing attack</td><td>Easily fooled by fake sites</td><td>Codes can be phished too</td><td>Works only on the real site — nothing to steal</td></tr>
+        <tr><td>Server data breach</td><td>Stored secrets leak</td><td>Password underneath still leaks</td><td>Only public keys stored — useless to hackers</td></tr>
+        <tr><td>Reuse across sites</td><td>One leak exposes many accounts</td><td>Same weak password reused</td><td>Unique key pair per website, automatically</td></tr>
+        <tr><td>Guessing / brute force</td><td>Weak passwords crack fast</td><td>Weak passwords crack fast</td><td>Cryptographic strength — can't be guessed</td></tr>
+        <tr><td>Everyday effort</td><td>Remember, type, reset…</td><td>Type + wait for codes</td><td>One touch or glance — seconds</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= Q5 ================= -->
+<section id="storage" class="reveal">
+  <span class="float-glyph" style="--x:6%; --y:8%; --s:7rem" data-speed="0.35" aria-hidden="true">%</span>
+  <p class="q-tag">QUESTION 5</p>
+  <h2>Where is a passkey stored — device-specific or user-specific?</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3 class="accent">Synced passkeys &rarr; user-specific</h3>
+      <p>Stored in your personal cloud account — iCloud Keychain (Apple), Google Password
+         Manager, or Microsoft — and synced <strong>end-to-end encrypted</strong> across your
+         phone, tablet and laptop.</p>
+      <p>The passkey belongs to <strong>you</strong>, not to one device.</p>
+    </div>
+    <div class="card">
+      <h3 class="violet">Device-bound passkeys &rarr; device-specific</h3>
+      <p>Stored on a single piece of hardware — e.g., a YubiKey security key or a work
+         laptop — and never copied anywhere.</p>
+      <p>Maximum security, but if that device is gone, so is the passkey.</p>
+    </div>
+  </div>
+  <div class="callout callout-good">
+    <strong>So which is it?</strong> Both exist. For everyday accounts, passkeys are
+    user-specific credentials that live on all your devices via encrypted sync (third-party
+    managers like 1Password and Bitwarden work too). For high-security needs, they can be
+    locked to one device on purpose. Either way: the private key is never visible to you,
+    apps, or websites.
+  </div>
+</section>
+
+<!-- ================= Q6 ================= -->
+<section id="forget" class="reveal">
+  <p class="q-tag">QUESTION 6</p>
+  <h2>What if you forget your passkey?</h2>
+  <div class="callout callout-good big">
+    Good news: <strong>you can't forget a passkey</strong> — there is nothing to remember.
+    No string to memorize, nothing on a sticky note. Your device holds it; your fingerprint,
+    face, or PIN unlocks it.
+  </div>
+  <div class="grid grid-2">
+    <ul class="bullets">
+      <li><strong>Forgot your device PIN?</strong> — use biometrics, or recover the device through your Apple / Google / Microsoft account.</li>
+      <li><strong>Biometrics not working?</strong> — the device PIN is always there as the local fallback.</li>
+    </ul>
+    <ul class="bullets bullets-violet">
+      <li><strong>Can't access the passkey at all?</strong> — use the website's account recovery: recovery email/phone, backup codes, or another signed-in device.</li>
+      <li><strong>Then re-enroll</strong> — create a fresh passkey in seconds and remove the old one.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= Q7 ================= -->
+<section id="dos-donts" class="reveal">
+  <span class="float-glyph" style="--x:88%; --y:10%; --s:8rem" data-speed="0.4" aria-hidden="true">^</span>
+  <p class="q-tag">QUESTION 7</p>
+  <h2>Dos and Don'ts of passkeys</h2>
+  <div class="grid grid-2">
+    <div class="card dd-card dd-do">
+      <h3>DO</h3>
+      <ul class="dd-list">
+        <li><strong>Start with key accounts</strong> — email, banking, work logins first.</li>
+        <li><strong>Keep devices updated</strong> — OS and browser updates carry passkey improvements.</li>
+        <li><strong>Lock your device</strong> — a passkey is only as safe as your device PIN/biometrics.</li>
+        <li><strong>Set up recovery</strong> — recovery email, phone, and backup codes — before you need them.</li>
+        <li><strong>Register a second device</strong> — or a hardware key as backup where supported.</li>
+      </ul>
+    </div>
+    <div class="card dd-card dd-dont">
+      <h3>DON'T</h3>
+      <ul class="dd-list">
+        <li><strong>Share your device PIN</strong> — whoever can unlock your device can use your passkeys.</li>
+        <li><strong>Rely on one device only</strong> — no backup = painful recovery if it's lost.</li>
+        <li><strong>Create passkeys on shared devices</strong> — use your own phone/laptop instead.</li>
+        <li><strong>Delete the password too early</strong> — wait until passkey sign-in works on all your devices.</li>
+        <li><strong>Ignore recovery options</strong> — an account without recovery is a future lockout.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Q8 ================= -->
+<section id="lost" class="reveal">
+  <p class="q-tag">QUESTION 8</p>
+  <h2>What if you lose or destroy your device?</h2>
+  <p class="lead">It depends on which kind of passkey you had — this is where Question 5 pays off.</p>
+  <div class="grid grid-2">
+    <div class="card dd-do">
+      <h3>Synced passkeys — no drama</h3>
+      <ol class="dd-list num">
+        <li>Get a new device.</li>
+        <li>Sign in to your Apple / Google / Microsoft account.</li>
+        <li>Verify your identity (SMS, existing device, account recovery).</li>
+        <li>Your passkeys sync back automatically.</li>
+      </ol>
+      <p>Then open the lost device's account page and revoke its access.</p>
+    </div>
+    <div class="card dd-violet">
+      <h3>Device-bound passkeys — plan B</h3>
+      <p>That passkey is gone with the device. You fall back on what you prepared:</p>
+      <ul class="dd-list">
+        <li>A second registered device or backup security key.</li>
+        <li>The website's account recovery (email, phone, codes).</li>
+        <li>Then create a new passkey and remove the lost one.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout callout-accent">
+    <strong>Moral of the story:</strong> losing a device is an inconvenience, not a catastrophe —
+    <em>if</em> you set up sync + recovery options beforehand. Two minutes of setup today
+    saves a lockout tomorrow.
+  </div>
+</section>
+
+<!-- ================= TAKEAWAYS ================= -->
+<section id="takeaways" class="reveal">
+  <p class="q-tag">SUMMARY</p>
+  <h2>Key takeaways</h2>
+  <ol class="takeaways">
+    <li class="reveal">A passkey replaces the shared-secret password with a cryptographic key pair on your devices.</li>
+    <li class="reveal">It emerged from the FIDO Alliance (2012) and WebAuthn standard (2019); Apple, Google &amp; Microsoft brought it mainstream in 2022.</li>
+    <li class="reveal">It's stronger by design: phishing-resistant, unique per site, and nothing valuable leaks in a breach.</li>
+    <li class="reveal">Synced passkeys are user-specific (roam across your devices); device-bound ones live on a single key — by choice.</li>
+    <li class="reveal">You can't forget a passkey; losing a device is recoverable if you set up sync, a second device, and recovery options.</li>
+  </ol>
+</section>
+
+</main>
+
+<footer>
+  <p class="foot-cta">Try it yourself: create a passkey on your Google or Apple account today — it takes under a minute.</p>
+  <p class="foot-links">
+    <a href="https://fidoalliance.org/passkeys/" target="_blank" rel="noopener">fidoalliance.org/passkeys</a> ·
+    <a href="https://passkeys.dev" target="_blank" rel="noopener">passkeys.dev</a> ·
+    <a href="https://webauthn.guide" target="_blank" rel="noopener">webauthn.guide</a>
+  </p>
+  <p class="foot-note">Community knowledge-sharing session · Built with vanilla HTML/CSS/JS</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
